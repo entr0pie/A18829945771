@@ -24,12 +24,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import br.edu.up.a18829945771.data.Item
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(mainScreenViewModel: MainScreenViewModel = viewModel()) {
+fun MainScreen(
+    nav: NavController,
+    selectedItemViewModel: SelectedItemViewModel,
+    mainScreenViewModel: MainScreenViewModel = viewModel()
+) {
     val items by mainScreenViewModel.items.collectAsState()
 
     Scaffold (
@@ -45,7 +50,7 @@ fun MainScreen(mainScreenViewModel: MainScreenViewModel = viewModel()) {
             )
         },
         floatingActionButton = {
-            FloatingActionButton (onClick = { }) {
+            FloatingActionButton (onClick = { nav.navigate("create") }) {
                 Icon(Icons.Default.Add, contentDescription = "Add")
 
             }

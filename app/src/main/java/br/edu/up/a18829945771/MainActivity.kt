@@ -11,7 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import br.edu.up.a18829945771.screens.CreateScreen
 import br.edu.up.a18829945771.screens.MainScreen
+import br.edu.up.a18829945771.screens.SelectedItemViewModel
 import br.edu.up.a18829945771.ui.theme.AppA18829945771Theme
 
 class MainActivity : ComponentActivity() {
@@ -20,8 +27,18 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppA18829945771Theme {
-                MainScreen()
+                NavigationGraph()
             }
         }
+    }
+}
+
+@Composable
+fun NavigationGraph(navController: NavHostController = rememberNavController()) {
+    val selectedItemViewModel: SelectedItemViewModel = viewModel()
+
+    NavHost(navController = navController, startDestination = "main") {
+        composable("main") { MainScreen(navController, selectedItemViewModel) }
+        composable("create") { CreateScreen(navController) }
     }
 }
