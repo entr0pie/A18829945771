@@ -1,6 +1,7 @@
 package br.edu.up.a18829945771.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -57,17 +58,20 @@ fun MainScreen(
         }
     ) { innerPadding ->
         Box(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
-            ItemList(items)
+            ItemList(items, nav, selectedItemViewModel)
         }
     }
 
 }
 
 @Composable
-fun ItemList(items: List<Item>) {
+fun ItemList(items: List<Item>, nav: NavController, selectedItemViewModel: SelectedItemViewModel) {
     LazyColumn {
         items(items) {
-            Box(modifier = Modifier.height(40.dp).padding(8.dp)){
+            Box(modifier = Modifier.height(40.dp).padding(8.dp).clickable {
+                selectedItemViewModel.select(it)
+                nav.navigate("update")
+            }){
                 Text(text = it.name)
             }
 

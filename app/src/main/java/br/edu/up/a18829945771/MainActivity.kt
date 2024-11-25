@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import br.edu.up.a18829945771.screens.CreateScreen
 import br.edu.up.a18829945771.screens.MainScreen
 import br.edu.up.a18829945771.screens.SelectedItemViewModel
+import br.edu.up.a18829945771.screens.UpdateScreen
 import br.edu.up.a18829945771.ui.theme.AppA18829945771Theme
 
 class MainActivity : ComponentActivity() {
@@ -40,5 +41,6 @@ fun NavigationGraph(navController: NavHostController = rememberNavController()) 
     NavHost(navController = navController, startDestination = "main") {
         composable("main") { MainScreen(navController, selectedItemViewModel) }
         composable("create") { CreateScreen(navController) }
+        composable("update") { UpdateScreen(navController, selectedItemViewModel) }
     }
 }
